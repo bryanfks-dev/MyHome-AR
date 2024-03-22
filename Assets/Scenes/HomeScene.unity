@@ -3174,7 +3174,7 @@ GameObject:
   - component: {fileID: 2114654007}
   - component: {fileID: 2114654006}
   m_Layer: 5
-  m_Name: Viewing Canvas
+  m_Name: FreeView Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
