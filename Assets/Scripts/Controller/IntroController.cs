@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class introController : MonoBehaviour
+public class IntroController : MonoBehaviour
 {
     public int pageCount;
     public Color selectedPageColor;
@@ -15,9 +15,21 @@ public class introController : MonoBehaviour
     private GameObject skipBtn;
     private List<GameObject> dots;
 
-    private List<GameObject> getChildren(GameObject go)
+    // Start is called before the first frame update
+    void Start()
     {
-        List<GameObject> list = new List<GameObject>();
+        // Initialize gameobjects
+        nextBtn = GameObject.Find("Next btn");
+        skipBtn = GameObject.Find("Skip btn");
+        dots = GetChildren(GameObject.Find("Progress"));
+
+        DisplayPage();
+        UpdateProgressColor();
+    }
+
+    private List<GameObject> GetChildren(GameObject go)
+    {
+        List<GameObject> list = new();
 
         for (int i = 0; i < go.transform.childCount; i++)
         {
@@ -27,19 +39,7 @@ public class introController : MonoBehaviour
         return list;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Initialize gameobjects
-        nextBtn = GameObject.Find("Next btn");
-        skipBtn = GameObject.Find("Skip btn");
-        dots = getChildren(GameObject.Find("Progress"));
-
-        displayPage();
-        updateProgressColor();
-    }
-
-    private void displayPage()
+    private void DisplayPage()
     {
         foreach (GameObject go in dynamicGameobjects)
         {
@@ -52,17 +52,17 @@ public class introController : MonoBehaviour
         }
     }
 
-    private void changeBtnText(Text btn, string text)
+    private void ChangeBtnText(Text btn, string text)
     {
         btn.text = text;
     }
 
-    private void hideSkipButton()
+    private void HideSkipButton()
     {
         skipBtn.GetComponent<Text>().color = Color.white;
     }
 
-    private void updateProgressColor()
+    private void UpdateProgressColor()
     {
         // Display page content according to current page index
         for (int i = 0; i < pageCount; i++)
@@ -80,19 +80,19 @@ public class introController : MonoBehaviour
         }
     }
 
-    public void nextBtnHandler()
+    public void NextBtnHandler()
     {
         if (_currPageIdx < pageCount - 2)
         {
             // Update index
             _currPageIdx++;
 
-            displayPage();
-            updateProgressColor();
+            DisplayPage();
+            UpdateProgressColor();
         }
         else if (_currPageIdx == pageCount - 2)
         {
-            skipBtnHandler();
+            SkipBtnHandler();
         }
         // _currPageIdx at the last page index
         else
@@ -108,15 +108,15 @@ public class introController : MonoBehaviour
         }
     }
 
-    public void skipBtnHandler()
+    public void SkipBtnHandler()
     {
         // Update index
         _currPageIdx = pageCount - 1;
 
-        displayPage();
-        hideSkipButton();
-        updateProgressColor();
+        DisplayPage();
+        HideSkipButton();
+        UpdateProgressColor();
 
-        changeBtnText(nextBtn.GetComponent<Text>(), "Done");
+        ChangeBtnText(nextBtn.GetComponent<Text>(), "Done");
     }
 }

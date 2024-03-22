@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class mainSceneController : MonoBehaviour
+public class MainSceneController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

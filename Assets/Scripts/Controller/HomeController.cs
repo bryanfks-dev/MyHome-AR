@@ -2,11 +2,19 @@ using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class homeController : MonoBehaviour
+public class HomeController : MonoBehaviour
 {
     public GameObject GetStartedPopUp;
 
-    private void ignoreRaycastTarget()
+    // Start is called before the first frame update
+    void Start()
+    {
+        // Debugging purpose
+        JsonFile.initJson();
+        GetStartedPopUpHandler();
+    }
+
+    private void IgnoreRaycastTarget()
     {
         GameObject currGameObj = gameObject;
 
@@ -28,7 +36,7 @@ public class homeController : MonoBehaviour
         }
     }
 
-    private void obeyRaycastTarget()
+    private void ObeyRaycastTarget()
     {
         GameObject currGameObj = gameObject;
 
@@ -46,17 +54,17 @@ public class homeController : MonoBehaviour
         }
     }
 
-    private void popUpButtonHandler()
+    private void PopUpButtonHandler()
     {
         JsonFile.writePassedGetStarted(true);
 
         // Hide popup
         GetStartedPopUp.SetActive(false);
 
-        obeyRaycastTarget();
+        ObeyRaycastTarget();
     }
 
-    private void getStartedPopUpHandler()
+    private void GetStartedPopUpHandler()
     {
         // Check if user has passed get started popup
         if (JsonFile.data.passed_get_started_popup)
@@ -66,7 +74,7 @@ public class homeController : MonoBehaviour
         }
         else
         {
-            ignoreRaycastTarget();
+            IgnoreRaycastTarget();
 
             // Handle button in get started popup
             // Get popup button
@@ -76,14 +84,7 @@ public class homeController : MonoBehaviour
                 .GetChild(popUpChildrenLen - 1).GetComponent<Button>();
 
             // Add click listener to button
-            button.onClick.AddListener(popUpButtonHandler);
+            button.onClick.AddListener(PopUpButtonHandler);
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        JsonFile.initJson();
-        getStartedPopUpHandler();
     }
 }

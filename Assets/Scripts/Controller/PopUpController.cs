@@ -1,19 +1,10 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class popUpController : MonoBehaviour, IPointerClickHandler
+public class PopUpController : MonoBehaviour, IPointerClickHandler
 {
     private GameObject button;
     private GameObject popUpModal;
-
-    private void HidePopUp()
-    {
-        // Make sure pop-up modal is not null
-        if (popUpModal != null)
-        {
-            popUpModal.SetActive(false);
-        }
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +16,15 @@ public class popUpController : MonoBehaviour, IPointerClickHandler
         popUpModal = button.transform.GetChild(0).gameObject;
 
         HidePopUp();
+    }
+
+    private void HidePopUp()
+    {
+        // Make sure pop-up modal is not null
+        if (popUpModal != null)
+        {
+            popUpModal.SetActive(false);
+        }
     }
 
     // OnPointerClick is called once current gameobject is clicked

@@ -8,8 +8,19 @@ public class GameManager : MonoBehaviour
 
     private MarkerData data;
     private Animator animator;
-
     private float oldSliderValue;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     private void SwitchToInGameCanvas()
     {
@@ -56,16 +67,5 @@ public class GameManager : MonoBehaviour
 
         SwitchToInGameCanvas();
         InitSlider(data.steps);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 }
