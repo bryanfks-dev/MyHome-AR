@@ -28,7 +28,10 @@ public class GameManager : MonoBehaviour
         {
             GameObject childObj = UICanvas.transform.GetChild(i).gameObject;
 
-            childObj.SetActive(childObj.name == "Ingame");
+            if (childObj.name != "Loading")
+            {
+                childObj.SetActive(childObj.name == "Ingame");
+            }
         }
     }
 
