@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class ARManager : MonoBehaviour
 {
     public Canvas UICanvas;
     public Slider PercentSlider;
