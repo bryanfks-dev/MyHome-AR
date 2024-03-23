@@ -25,15 +25,23 @@ public class SwitchCameraController : MonoBehaviour
 
     public void ManageCamera()
     {
-        if (Manager == 0)
+        switch (Manager)
         {
-            SwitchCamera(0, 1);
-            Manager = 1;
-        }
-        else
-        {
-            SwitchCamera(1, 0);
-            Manager = 0;
+            case 0:
+                SwitchCamera(0, 1);
+                Manager = 1;
+
+                Screen.orientation = ScreenOrientation.LandscapeLeft;
+
+                break;
+
+            case 1:
+                SwitchCamera(1, 0);
+                Manager = 0;
+
+                Screen.orientation = ScreenOrientation.Portrait;
+
+                break;
         }
     }
 
