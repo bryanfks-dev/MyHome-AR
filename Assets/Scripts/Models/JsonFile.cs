@@ -10,47 +10,48 @@ public class Data
 
 public class JsonFile: MonoBehaviour
 {
-    private static string _jsonPath = Application.persistentDataPath + "/data.json";
+    private static string jsonPath = Application.persistentDataPath + "/data.json";
     public static Data data = null;
 
-    public static void initJson()
+    public static void InitJson()
     {
-        if (!File.Exists(_jsonPath))
+        // Check if json file is exists
+        if (!File.Exists(jsonPath))
         {
             // Initialize default Data class value
             data = new Data();
 
             // Write json with default value
-            writeFile(data);
+            WriteFile(data);
         }
         else
         {
             // Retrieve data from json file
-            string jsonData = File.ReadAllText(_jsonPath);
+            string jsonData = File.ReadAllText(jsonPath);
 
             // Convert json data into Data class
             data = JsonUtility.FromJson<Data>(jsonData);
         }
     }
 
-    private static void writeFile(Data data)
+    private static void WriteFile(Data data)
     {
         string jsonData = JsonUtility.ToJson(data);
 
-        File.WriteAllText(_jsonPath, jsonData);
+        File.WriteAllText(jsonPath, jsonData);
     }
 
-    public static void writePassedIntro(bool boolean)
+    public static void WritePassedIntro(bool boolean)
     {
         data.passed_intro_screen = boolean;
 
-        writeFile(data);
+        WriteFile(data);
     }
 
-    public static void writePassedGetStarted(bool boolean)
+    public static void WritePassedGetStarted(bool boolean)
     {
         data.passed_get_started_popup = boolean;
 
-        writeFile(data);
+        WriteFile(data);
     }
 }

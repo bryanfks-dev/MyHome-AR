@@ -10,7 +10,7 @@ public class IntroController : MonoBehaviour
     public Color unselectedPageColor;
     public GameObject[] dynamicGameobjects;
 
-    private int _currPageIdx = 0;
+    private int currPageIdx = 0;
     private GameObject nextBtn;
     private GameObject skipBtn;
     private List<GameObject> dots;
@@ -29,7 +29,7 @@ public class IntroController : MonoBehaviour
 
     private List<GameObject> GetChildren(GameObject go)
     {
-        List<GameObject> list = new();
+        List<GameObject> list = new List<GameObject>();
 
         for (int i = 0; i < go.transform.childCount; i++)
         {
@@ -47,7 +47,7 @@ public class IntroController : MonoBehaviour
             for (int i = 0; i < go.transform.childCount; i++) {
                 GameObject childObj = go.transform.GetChild(i).gameObject;
 
-                childObj.SetActive(i == _currPageIdx);
+                childObj.SetActive(i == currPageIdx);
             }
         }
     }
@@ -69,7 +69,7 @@ public class IntroController : MonoBehaviour
         {
             Image goAsImg = dots[i].GetComponent<Image>();
 
-            if (i == _currPageIdx)
+            if (i == currPageIdx)
             {
                 goAsImg.color = selectedPageColor;
             }
@@ -82,15 +82,15 @@ public class IntroController : MonoBehaviour
 
     public void NextBtnHandler()
     {
-        if (_currPageIdx < pageCount - 2)
+        if (currPageIdx < pageCount - 2)
         {
             // Update index
-            _currPageIdx++;
+            currPageIdx++;
 
             DisplayPage();
             UpdateProgressColor();
         }
-        else if (_currPageIdx == pageCount - 2)
+        else if (currPageIdx == pageCount - 2)
         {
             SkipBtnHandler();
         }
@@ -98,7 +98,7 @@ public class IntroController : MonoBehaviour
         else
         {
             // Write json file
-            JsonFile.writePassedIntro(true);
+            JsonFile.WritePassedIntro(true);
 
             // Unload current scene
             SceneManager.UnloadSceneAsync("IntroScene");
@@ -111,7 +111,7 @@ public class IntroController : MonoBehaviour
     public void SkipBtnHandler()
     {
         // Update index
-        _currPageIdx = pageCount - 1;
+        currPageIdx = pageCount - 1;
 
         DisplayPage();
         HideSkipButton();

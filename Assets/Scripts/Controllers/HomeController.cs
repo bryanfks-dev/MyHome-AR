@@ -9,10 +9,10 @@ public class HomeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Debugging purpose
         if (JsonFile.data == null)
         {
-            // Debugging purpose
-            JsonFile.initJson();
+            JsonFile.InitJson();
 
             GetStartedPopUpHandler();
         }
@@ -60,7 +60,7 @@ public class HomeController : MonoBehaviour
 
     private void PopUpButtonHandler()
     {
-        JsonFile.writePassedGetStarted(true);
+        JsonFile.WritePassedGetStarted(true);
 
         // Hide popup
         GetStartedPopUp.SetActive(false);

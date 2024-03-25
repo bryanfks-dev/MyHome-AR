@@ -71,6 +71,6 @@ public class ARManager : MonoBehaviour
         SwitchToInGameCanvas();
         InitSlider(data.steps);
 
-        SwitchCameraController.SetModelId(data.id);
+        FreeViewController.SetModelId(data.id);
     }
 }

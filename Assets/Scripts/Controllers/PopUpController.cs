@@ -27,7 +27,6 @@ public class PopUpController : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    // OnPointerClick is called once current gameobject is clicked
     public void OnPointerClick(PointerEventData eventData)
     {
         // Set popup modal activate state
