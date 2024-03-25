@@ -1,7 +1,4 @@
-using System.Transactions;
-using UnityEditor.Timeline;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public class PlayerManager : MonoBehaviour
@@ -9,8 +6,8 @@ public class PlayerManager : MonoBehaviour
     public FixedJoystick MoveJoystick;
     public float MoveSpeed;
 
-    public FixedJoystick ViewJoystick;
     public float ViewSpeed;
+    public TouchFieldController TouchFieldController;
 
     public Camera PlayerCamera;
 
@@ -39,11 +36,13 @@ public class PlayerManager : MonoBehaviour
     {
         if (ParsePos(transform.position) != initPos)
         {
+            // Player movement handler
             playerRigid.velocity = transform.right * MoveJoystick.Horizontal * MoveSpeed + 
                 transform.forward * MoveJoystick.Vertical * MoveSpeed;
 
-            yRotate += ViewJoystick.Horizontal * ViewSpeed;
-            xRotate -= ViewJoystick.Vertical * ViewSpeed;
+            // Camera and player body rotation handler
+            yRotate += TouchFieldController.TouchDist.x * ViewSpeed * Time.deltaTime;
+            xRotate -= TouchFieldController.TouchDist.y * ViewSpeed * Time.deltaTime;
 
             // Prevent player to rotate more than 90 deg on vertical axis
             xRotate = Mathf.Clamp(xRotate, -90f, 90f);
