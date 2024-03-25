@@ -1,27 +1,69 @@
+using System.Transactions;
+using UnityEditor.Timeline;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
-[RequireComponent(typeof(Rigidbody), typeof(BoxCollider))]
+[RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public class PlayerManager : MonoBehaviour
 {
-    public FixedJoystick Joystick;
-    public Rigidbody Player;
+    public FixedJoystick MoveJoystick;
     public float MoveSpeed;
+
+    public FixedJoystick ViewJoystick;
+    public float ViewSpeed;
+
+    public Camera PlayerCamera;
+
+    private Rigidbody playerRigid;
+
+    static private Vector3 initPos;
+
+    private float xRotate;
+    private float yRotate;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerRigid = GetComponent<Rigidbody>();
 
+        initPos = ParsePos(transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        Player.velocity = new Vector3(Joystick.Horizontal * MoveSpeed,
-               Player.velocity.y, Joystick.Vertical * MoveSpeed);
+        if (ParsePos(transform.position) != initPos)
+        {
+            playerRigid.velocity = transform.right * MoveJoystick.Horizontal * MoveSpeed + 
+                transform.forward * MoveJoystick.Vertical * MoveSpeed;
+
+            yRotate += ViewJoystick.Horizontal * ViewSpeed;
+            xRotate -= ViewJoystick.Vertical * ViewSpeed;
+
+            // Prevent player to rotate more than 90 deg on vertical axis
+            xRotate = Mathf.Clamp(xRotate, -90f, 90f);
+
+            // Rotate player on to horizontal axis
+            playerRigid.rotation = Quaternion.Euler(yRotate * Vector3.up);
+
+            PlayerCamera.transform.localRotation = Quaternion.Euler(Vector3.right * xRotate);
+        }
+
+        // Add Gravity
+        playerRigid.AddForce(Physics.gravity * (playerRigid.mass * playerRigid.mass));
+    }
+
+    static public Vector3 GetPlayerInitPos() => initPos;
+
+    private Vector3 ParsePos(Vector3 oldVal)
+    {
+        Vector3 newVal = Vector3.right * oldVal.x + Vector3.forward * oldVal.z;
+
+        return newVal;
     }
 }

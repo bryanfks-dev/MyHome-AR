@@ -6,9 +6,9 @@ public class ARManager : MonoBehaviour
     public Canvas UICanvas;
     public Slider PercentSlider;
 
-    private MarkerData data;
-    private Animator animator;
-    private float oldSliderValue;
+    static private MarkerData data;
+    static private Animator animator;
+    static private float oldSliderValue;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,7 @@ public class ARManager : MonoBehaviour
 
             if (childObj.name != "Loading")
             {
-                childObj.SetActive(childObj.name == "Ingame");
+                childObj.SetActive(childObj.name == "AR Canvas");
             }
         }
     }
@@ -70,5 +70,7 @@ public class ARManager : MonoBehaviour
 
         SwitchToInGameCanvas();
         InitSlider(data.steps);
+
+        SwitchCameraController.SetModelId(data.id);
     }
 }

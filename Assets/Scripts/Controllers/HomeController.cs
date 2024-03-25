@@ -9,9 +9,13 @@ public class HomeController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Debugging purpose
-        JsonFile.initJson();
-        GetStartedPopUpHandler();
+        if (JsonFile.data == null)
+        {
+            // Debugging purpose
+            JsonFile.initJson();
+
+            GetStartedPopUpHandler();
+        }
     }
 
     private void IgnoreRaycastTarget()
