@@ -18,18 +18,15 @@ public class PopUpController : MonoBehaviour, IPointerClickHandler
         HidePopUp();
     }
 
-    private void HidePopUp()
-    {
-        // Make sure pop-up modal is not null
-        if (popUpModal != null)
-        {
-            popUpModal.SetActive(false);
-        }
-    }
-
     public void OnPointerClick(PointerEventData eventData)
     {
         // Set popup modal activate state
         popUpModal.SetActive(!popUpModal.activeSelf);
+    }
+
+    private void HidePopUp()
+    {
+        // Make sure pop-up modal is not null
+        popUpModal.SetActive(false);
     }
 }

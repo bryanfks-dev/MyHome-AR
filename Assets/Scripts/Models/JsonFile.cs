@@ -7,6 +7,8 @@ public class Data
     public bool passed_intro_screen = false;
     public bool passed_get_started_popup = false;
     public bool passed_instrcution = false;
+    public float fov = 60f;
+    public float view_sens = 10f;
 }
 
 public class JsonFile: MonoBehaviour
@@ -59,6 +61,20 @@ public class JsonFile: MonoBehaviour
     public static void WritePassedInstruction(bool boolean)
     {
         data.passed_instrcution = boolean;
+
+        WriteFile(data);
+    }
+
+    public static void WriteFOV(float num)
+    {
+        data.fov = num;
+
+        WriteFile(data);
+    }
+
+    public static void WriteViewSens(float num)
+    {
+        data.fov = num;
 
         WriteFile(data);
     }

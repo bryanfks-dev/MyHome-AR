@@ -9,19 +9,29 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public class PlayerManager : MonoBehaviour
 {
+    [Header("Player Attributes")]
+    private static GameObject playerGO;
+    private Rigidbody playerRigid;
+    private CapsuleCollider playerCollider;
+    public GameObject IsGroundRay;
+    public Camera PlayerCamera;
+
+    [Header("Player Movement")]
     public FixedJoystick MoveJoystick;
     public float MoveSpeed;
 
+    [Header("Player Rotation")]
     public float ViewSpeed;
     public TouchFieldController TouchFieldController;
-
-    private static GameObject playerGO;
-    private Rigidbody playerRigid;
-    public Camera PlayerCamera;
-
-    private static Vector3 initPos;
     public FreeViewManager FreeViewManager;
 
+    [Header("Player Step Climb")]
+    public GameObject StepUpper;
+    public GameObject StepLower;
+    public float StepHeight;
+    public float StepSmooth;
+
+    private static Vector3 initPos;
     private float xRotate;
     private float yRotate;
 
@@ -30,6 +40,9 @@ public class PlayerManager : MonoBehaviour
     {
         playerGO = gameObject;
         playerRigid = GetComponent<Rigidbody>();
+        playerCollider = GetComponent<CapsuleCollider>();
+
+        StepUpper.transform.localPosition += Vector3.up * StepHeight;
 
         initPos = ParsePos(transform.position);
     }
@@ -42,8 +55,8 @@ public class PlayerManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (ParsePos(transform.position) != initPos)
-        {
+        /*if (ParsePos(transform.position) != initPos)
+        {*/
             // Player movement handler
             playerRigid.velocity = MoveJoystick.Horizontal * MoveSpeed * transform.right + 
                 MoveJoystick.Vertical * MoveSpeed * transform.forward;
@@ -62,10 +75,54 @@ public class PlayerManager : MonoBehaviour
 
             // Rotate camera on vertical axis
             PlayerCamera.transform.localRotation = Quaternion.Euler(Vector3.right * xRotate);
+        /*}*/
+
+        if (!IsGrounded()) 
+        {
+            // Add Gravity
+            playerRigid.AddForce((playerRigid.mass * playerRigid.mass) * Physics.gravity);
         }
 
-        // Add Gravity
-        playerRigid.AddForce((playerRigid.mass * playerRigid.mass) * 10 * Physics.gravity);
+        StepClimb();
+    }
+
+    private bool IsGrounded()
+    {
+        float playerHeight = playerCollider.height / 2;
+
+        if (Physics.Raycast(IsGroundRay.transform.position, Vector3.down, out _, playerHeight))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void StepClimb()
+    {
+        if (Physics.Raycast(StepLower.transform.position, transform.TransformDirection(Vector3.forward), out _  , 1f))
+        {
+            if (!Physics.Raycast(StepUpper.transform.position, transform.TransformDirection(Vector3.forward), out _, 2f))
+            {
+                playerRigid.position -= new Vector3(0, -StepSmooth * Time.deltaTime, 0);
+            }
+        }
+
+        if (Physics.Raycast(StepLower.transform.position, transform.TransformDirection(1.5f, 0, 1), out _, 0.1f))
+        {
+            if (!Physics.Raycast(StepUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), out _, 0.2f))
+            {
+                playerRigid.position -= new Vector3(0f, -StepSmooth * Time.deltaTime, 0f);
+            }
+        }
+
+        if (Physics.Raycast(StepLower.transform.position, transform.TransformDirection(-1.5f, 0, 1), out _, 0.1f))
+        {
+            if (!Physics.Raycast(StepUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), out _, 0.2f))
+            {
+                playerRigid.position -= new Vector3(0f, -StepSmooth * Time.deltaTime, 0f);
+            }
+        }
     }
 
     private Vector3 ParsePos(Vector3 oldVal)
@@ -93,8 +150,6 @@ public class PlayerManager : MonoBehaviour
 
         Vector3 newPos = new Vector3(modelTransform.position.x,
             modelTransform.position.y + 100f, modelTransform.position.z);
-
-        ChangePos(newPos);
     }
 
     public void ResetPlayerPosition()

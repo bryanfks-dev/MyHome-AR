@@ -8,11 +8,13 @@ using UnityEngine.UI;
 public class ARManager : MonoBehaviour
 {
     public Canvas UICanvas;
+
+    [Header("Slider Attribute(s)")]
     public Slider PercentSlider;
+    private static float oldSliderValue;
 
     private static MarkerData data;
     private static Animator animator;
-    private static float oldSliderValue;
 
     // Start is called before the first frame update
     void Start()
