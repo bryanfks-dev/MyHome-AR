@@ -45,7 +45,7 @@ public class PlayerManager : MonoBehaviour
         if (ParsePos(transform.position) != initPos)
         {
             // Player movement handler
-            playerRigid.velocity = transform.right * MoveJoystick.Horizontal * MoveSpeed + 
+            playerRigid.velocity = MoveJoystick.Horizontal * MoveSpeed * transform.right + 
                 MoveJoystick.Vertical * MoveSpeed * transform.forward;
 
             // Camera and player body rotation handler
@@ -65,7 +65,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         // Add Gravity
-        playerRigid.AddForce(Physics.gravity * (playerRigid.mass * playerRigid.mass) * 10);
+        playerRigid.AddForce((playerRigid.mass * playerRigid.mass) * 10 * Physics.gravity);
     }
 
     private Vector3 ParsePos(Vector3 oldVal)
