@@ -1,10 +1,14 @@
 using UnityEngine;
 
+/*
+ * FreeViewManager script handle game logic
+ * for free viewing to explore around the house.
+ */
 public class FreeViewManager : MonoBehaviour
 {
     public GameObject[] Models;
 
-    static private int modelId;
+    private static int modelId;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +22,7 @@ public class FreeViewManager : MonoBehaviour
         
     }
 
-    static public void SetModelId(int id)
+    public static void SetModelId(int id)
     {
         modelId = id;
     }

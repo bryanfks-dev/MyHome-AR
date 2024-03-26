@@ -1,14 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * ARManager script handle game logic related
+ * to Augemented Reality technology.
+ */
 public class ARManager : MonoBehaviour
 {
     public Canvas UICanvas;
     public Slider PercentSlider;
 
-    static private MarkerData data;
-    static private Animator animator;
-    static private float oldSliderValue;
+    private static MarkerData data;
+    private static Animator animator;
+    private static float oldSliderValue;
 
     // Start is called before the first frame update
     void Start()

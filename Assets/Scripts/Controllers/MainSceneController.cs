@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /*
- * Main Scene is a scene that behave like a bridge between home page scene and 
+ * Main Scene is a scene that acting like a "bridge" between home page scene and 
  * intro page scene, other than that, main scene could also be the selector of 
  * these 2 scene to initializing and start the application.
  */

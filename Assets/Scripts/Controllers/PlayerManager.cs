@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/*
+ * PlayerManager script handle any logic and physics
+ * related to player and player camera, includes
+ * movement logic, body and camera rotation logic, 
+ * teleporation logic and even gravity physics logic.
+ */
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public class PlayerManager : MonoBehaviour
 {
@@ -9,11 +15,11 @@ public class PlayerManager : MonoBehaviour
     public float ViewSpeed;
     public TouchFieldController TouchFieldController;
 
-    static private GameObject playerGO;
+    private static GameObject playerGO;
     private Rigidbody playerRigid;
     public Camera PlayerCamera;
 
-    static private Vector3 initPos;
+    private static Vector3 initPos;
     public FreeViewManager FreeViewManager;
 
     private float xRotate;
@@ -40,7 +46,7 @@ public class PlayerManager : MonoBehaviour
         {
             // Player movement handler
             playerRigid.velocity = transform.right * MoveJoystick.Horizontal * MoveSpeed + 
-                transform.forward * MoveJoystick.Vertical * MoveSpeed;
+                MoveJoystick.Vertical * MoveSpeed * transform.forward;
 
             // Camera and player body rotation handler
             // Calculate x and y rotation value depends on given
@@ -59,7 +65,7 @@ public class PlayerManager : MonoBehaviour
         }
 
         // Add Gravity
-        playerRigid.AddForce(Physics.gravity * (playerRigid.mass * playerRigid.mass));
+        playerRigid.AddForce(Physics.gravity * (playerRigid.mass * playerRigid.mass) * 10);
     }
 
     private Vector3 ParsePos(Vector3 oldVal)
@@ -86,7 +92,7 @@ public class PlayerManager : MonoBehaviour
         Transform modelTransform = FreeViewManager.GetModel().transform;
 
         Vector3 newPos = new Vector3(modelTransform.position.x,
-            modelTransform.position.y + 30f, modelTransform.position.z);
+            modelTransform.position.y + 100f, modelTransform.position.z);
 
         ChangePos(newPos);
     }

@@ -6484,7 +6484,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Instructions
+  m_Text: Instruction
 --- !u!222 &416913412
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13378,7 +13378,7 @@ MonoBehaviour:
     m_NormalColor: {r: 0.36862746, g: 0.33333334, b: 1, a: 1}
     m_HighlightedColor: {r: 0.29411766, g: 0.2627451, b: 0.8, a: 1}
     m_PressedColor: {r: 0.25490198, g: 0.23137255, b: 0.69803923, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_SelectedColor: {r: 0.36862746, g: 0.33333334, b: 1, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -13397,7 +13397,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 882592544}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2114654009}
+        m_TargetAssemblyTypeName: FreeViewController, Assembly-CSharp
+        m_MethodName: UnderstandButtonHandler
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &882592544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20533,7 +20545,7 @@ MonoBehaviour:
   ViewSpeed: 12
   TouchFieldController: {fileID: 325243094}
   PlayerCamera: {fileID: 1121788992}
-  FreeViewManager: {fileID: 0}
+  FreeViewManager: {fileID: 1033909344}
 --- !u!54 &988138976
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21471,7 +21483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Models:
-  - {fileID: 1696673352}
+  - {fileID: 982372218}
 --- !u!65 &1039448786
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22461,7 +22473,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1111003843}
-  - component: {fileID: 1111003844}
   m_Layer: 0
   m_Name: Free View
   m_TagString: Untagged
@@ -22486,18 +22497,6 @@ Transform:
   - {fileID: 432334927}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1111003844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1111003842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5a03844877f18447866d233aec79d23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &1112093940
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38417,7 +38416,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1747115297}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1240393824}
+        m_TargetAssemblyTypeName: HomeController, Assembly-CSharp
+        m_MethodName: StartBtnHandler
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1747115297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43229,6 +43240,7 @@ GameObject:
   - component: {fileID: 2114654008}
   - component: {fileID: 2114654007}
   - component: {fileID: 2114654006}
+  - component: {fileID: 2114654009}
   m_Layer: 5
   m_Name: FreeView Canvas
   m_TagString: Untagged
@@ -43321,6 +43333,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &2114654009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114654004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a03844877f18447866d233aec79d23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InstructionCanvas: {fileID: 1611320905}
 --- !u!65 &2117962158
 BoxCollider:
   m_ObjectHideFlags: 0

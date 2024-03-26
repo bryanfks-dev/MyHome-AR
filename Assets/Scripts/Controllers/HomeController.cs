@@ -1,6 +1,5 @@
 using Unity.VectorGraphics;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HomeController : MonoBehaviour
 {
@@ -13,9 +12,9 @@ public class HomeController : MonoBehaviour
         if (JsonFile.data == null)
         {
             JsonFile.InitJson();
-
-            GetStartedPopUpHandler();
         }
+
+        GetStartedPopUpHandler();
     }
 
     private void IgnoreRaycastTarget()
@@ -79,16 +78,6 @@ public class HomeController : MonoBehaviour
         else
         {
             IgnoreRaycastTarget();
-
-            // Handle button in get started popup
-            // Get popup button
-            int popUpChildrenLen = GetStartedPopUp.transform.childCount;
-
-            Button button = GetStartedPopUp.transform
-                .GetChild(popUpChildrenLen - 1).GetComponent<Button>();
-
-            // Add click listener to button
-            button.onClick.AddListener(PopUpButtonHandler);
         }
     }
 }

@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/*
+ * SwitchCameraController script handle switching camera 
+ * especially used in loading canvas to do camera
+ * switching, change device screen orientation, and
+ * doing player teleportation.
+ */
 public class SwitchCameraController : MonoBehaviour
 {
     public GameObject[] CameraList;

@@ -1,6 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/*
+ * TouchFieldController script handle touchscreen process 
+ * with swiping screen using finger to do camera and body 
+ * rotation.
+ */
 public class TouchFieldController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [HideInInspector]
@@ -37,7 +42,7 @@ public class TouchFieldController : MonoBehaviour, IPointerDownHandler, IPointer
         }
         else
         {
-            // Set Touchdist as Vector2.zero
+            // Set Touchdist as vector equivalent to Vector2.zero
             TouchDist = new Vector2();
         }
     }

@@ -6,11 +6,12 @@ public class Data
 {
     public bool passed_intro_screen = false;
     public bool passed_get_started_popup = false;
+    public bool passed_instrcution = false;
 }
 
 public class JsonFile: MonoBehaviour
 {
-    private static string jsonPath = Application.persistentDataPath + "/data.json";
+    private static readonly string jsonPath = Application.persistentDataPath + "/data.json";
     public static Data data = null;
 
     public static void InitJson()
@@ -51,6 +52,13 @@ public class JsonFile: MonoBehaviour
     public static void WritePassedGetStarted(bool boolean)
     {
         data.passed_get_started_popup = boolean;
+
+        WriteFile(data);
+    }
+
+    public static void WritePassedInstruction(bool boolean)
+    {
+        data.passed_instrcution = boolean;
 
         WriteFile(data);
     }
