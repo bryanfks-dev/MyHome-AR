@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FreeViewController : MonoBehaviour
 {
@@ -30,6 +32,15 @@ public class FreeViewController : MonoBehaviour
         InstructionCanvas.SetActive(false);
     }
 
+    private IEnumerator WaitForBtn(Button btn, int seconds)
+    {
+        btn.interactable = false;
+
+        yield return new WaitForSeconds(seconds);
+
+        btn.interactable = true;
+    }
+
     private void InstructionHandler()
     {
         // Check if user has passed get started popup
@@ -37,6 +48,12 @@ public class FreeViewController : MonoBehaviour
         {
             // Hide canvas
             InstructionCanvas.SetActive(false);
+        }
+        else
+        {
+            Button understandBtn = GetComponentInChildren<Button>();
+
+            StartCoroutine(WaitForBtn(understandBtn, 3));
         }
     }
 }
