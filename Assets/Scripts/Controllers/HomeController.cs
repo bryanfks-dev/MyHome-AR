@@ -57,7 +57,7 @@ public class HomeController : MonoBehaviour
         }
     }
 
-    private void PopUpButtonHandler()
+    public void GetStartedBtnHandler()
     {
         JsonFile.WritePassedGetStarted(true);
 

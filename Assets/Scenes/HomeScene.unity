@@ -13379,7 +13379,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.29411766, g: 0.2627451, b: 0.8, a: 1}
     m_PressedColor: {r: 0.25490198, g: 0.23137255, b: 0.69803923, a: 1}
     m_SelectedColor: {r: 0.36862746, g: 0.33333334, b: 1, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.36862746, g: 0.33333334, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -13400,7 +13400,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2114654009}
         m_TargetAssemblyTypeName: FreeViewController, Assembly-CSharp
-        m_MethodName: UnderstandButtonHandler
+        m_MethodName: UnderstandBtnHandler
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -38419,7 +38419,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1240393824}
         m_TargetAssemblyTypeName: HomeController, Assembly-CSharp
-        m_MethodName: StartBtnHandler
+        m_MethodName: GetStartedBtnHandler
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
