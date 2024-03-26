@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class FreeViewController : MonoBehaviour
 {
-    public GameObject[] Models;
-
-    static private int modelId;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -17,10 +13,4 @@ public class FreeViewController : MonoBehaviour
     {
         
     }
-    static public void SetModelId(int id)
-    {
-        modelId = id;
-    }
-
-    public GameObject GetModel() => Models[modelId];
 }

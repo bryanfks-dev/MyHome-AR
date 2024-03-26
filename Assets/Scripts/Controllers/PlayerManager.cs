@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     public Camera PlayerCamera;
 
     static private Vector3 initPos;
-    public FreeViewController FreeViewController;
+    public FreeViewManager FreeViewManager;
 
     private float xRotate;
     private float yRotate;
@@ -83,7 +83,7 @@ public class PlayerManager : MonoBehaviour
     public void TeleportPlayerToHouse()
     {
         // Get house center position
-        Transform modelTransform = FreeViewController.GetModel().transform;
+        Transform modelTransform = FreeViewManager.GetModel().transform;
 
         Vector3 newPos = new Vector3(modelTransform.position.x,
             modelTransform.position.y + 30f, modelTransform.position.z);
