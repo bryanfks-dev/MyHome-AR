@@ -11,19 +11,12 @@ public class SwitchCameraController : MonoBehaviour
     public GameObject[] CameraList;
     public int Manager;
 
+    [Header("Player Attributes")]
     public PlayerManager PlayerManager;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Canvas")]
+    public GameObject ARCanvas;
+    public GameObject FreeViewCanvas;
 
     public void ChangeCamera()
     {
@@ -41,7 +34,11 @@ public class SwitchCameraController : MonoBehaviour
 
                 PlayerManager.TeleportPlayerToHouse();
 
+                ARCanvas.SetActive(false);
+
                 Screen.orientation = ScreenOrientation.LandscapeLeft;
+
+                FreeViewCanvas.SetActive(true);
 
                 break;
 
@@ -51,7 +48,11 @@ public class SwitchCameraController : MonoBehaviour
 
                 PlayerManager.ResetPlayerPosition();
 
+                FreeViewCanvas.SetActive(false);
+
                 Screen.orientation = ScreenOrientation.Portrait;
+
+                ARCanvas.SetActive(true);
 
                 break;
         }

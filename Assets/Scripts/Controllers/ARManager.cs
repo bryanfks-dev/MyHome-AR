@@ -22,12 +22,6 @@ public class ARManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void SwitchToInGameCanvas()
     {
         for (int i = 0; i < UICanvas.transform.childCount; i++)
@@ -54,7 +48,7 @@ public class ARManager : MonoBehaviour
     {
         animator.speed = 0f;
 
-        animator.Play(data.animationName, 0, currStep / steps);
+        animator.Play($"{data.animationName}2", 0, currStep / steps);
     }
 
     public void UpdateSliderValue()
@@ -72,7 +66,7 @@ public class ARManager : MonoBehaviour
         data = markerObject.GetComponent<MarkerData>();
         animator = markerObject.GetComponent<Animator>();
 
-        animator.PlayInFixedTime(data.animationName);
+        animator.PlayInFixedTime($"{data.animationName}1");
 
         SwitchToInGameCanvas();
         InitSlider(data.steps);

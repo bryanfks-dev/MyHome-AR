@@ -1,26 +1,15 @@
 using UnityEngine;
 
 /*
- * FreeViewManager script handle game logic
+ * FreeViewManager script handle some game logic
  * for free viewing to explore around the house.
  */
 public class FreeViewManager : MonoBehaviour
 {
+    [Header("House Models Checkpoint")]
     public GameObject[] Models;
 
     private static int modelId;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public static void SetModelId(int id)
     {

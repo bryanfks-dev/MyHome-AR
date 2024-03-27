@@ -55,15 +55,9 @@ public class PlayerManager : MonoBehaviour
         initPos = ParsePos(transform.position);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void FixedUpdate()
     {
-        if (ParsePos(transform.position) != initPos)
+        if (ParsePos(playerGO.transform.position) != initPos)
         {
             // Player movement handler
             playerRigid.velocity = MoveJoystick.Horizontal * MoveSpeed * transform.right + 
@@ -122,17 +116,17 @@ public class PlayerManager : MonoBehaviour
             }
         }
 
-        if (Physics.Raycast(StepLower.transform.position, transform.TransformDirection(1.5f, 0, 1), out _, 0.1f))
+        if (Physics.Raycast(StepLower.transform.position, transform.TransformDirection(1.5f, 0, 1), out _, 1f))
         {
-            if (!Physics.Raycast(StepUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), out _, 0.2f))
+            if (!Physics.Raycast(StepUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), out _, 2f))
             {
                 playerRigid.position -= new Vector3(0f, -StepSmooth * Time.deltaTime, 0f);
             }
         }
 
-        if (Physics.Raycast(StepLower.transform.position, transform.TransformDirection(-1.5f, 0, 1), out _, 0.1f))
+        if (Physics.Raycast(StepLower.transform.position, transform.TransformDirection(-1.5f, 0, 1), out _, 1f))
         {
-            if (!Physics.Raycast(StepUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), out _, 0.2f))
+            if (!Physics.Raycast(StepUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), out _, 2f))
             {
                 playerRigid.position -= new Vector3(0f, -StepSmooth * Time.deltaTime, 0f);
             }
@@ -163,10 +157,11 @@ public class PlayerManager : MonoBehaviour
         Transform modelTransform = FreeViewManager.GetModel().transform;
 
         Vector3 newPos = new Vector3(modelTransform.position.x,
-            modelTransform.position.y + 100f, modelTransform.position.z);
+            modelTransform.position.y + 2f, modelTransform.position.z);
 
-        // HACK: Remove this to test stair codes
         ChangePos(newPos);
+
+        Debug.Log($"{newPos} {playerGO.transform.position}");
     }
 
     public void ResetPlayerPosition()

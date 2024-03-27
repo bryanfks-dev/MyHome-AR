@@ -17,12 +17,6 @@ public class OtherBtnController : MonoBehaviour, IPointerClickHandler
         OtherBtnHandler();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnPointerClick(PointerEventData eventData)
     {
         // Set other content active state
@@ -42,6 +36,8 @@ public class OtherBtnController : MonoBehaviour, IPointerClickHandler
 
     public void ExitHandler()
     {
+        OtherBtnHandler();
+
         // Switch camera
         SwitchCameraController.ChangeCamera();
 
