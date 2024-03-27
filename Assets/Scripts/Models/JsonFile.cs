@@ -74,7 +74,7 @@ public class JsonFile: MonoBehaviour
 
     public static void WriteViewSens(float num)
     {
-        data.fov = num;
+        data.view_sens = num;
 
         WriteFile(data);
     }

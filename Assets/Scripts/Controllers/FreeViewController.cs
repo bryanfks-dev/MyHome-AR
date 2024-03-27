@@ -9,12 +9,6 @@ public class FreeViewController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // HACK: Debugging purpose
-        if (JsonFile.data == null)
-        {
-            JsonFile.InitJson();
-        }
-
         InstructionHandler();
     }
 

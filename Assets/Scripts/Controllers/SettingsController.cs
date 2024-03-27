@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class SettingsController : MonoBehaviour
 {
+    public PlayerManager PlayerManager;
+
     [Header("Configs")]
     public GameObject[] ConfigWrappers;
 
@@ -49,6 +51,8 @@ public class SettingsController : MonoBehaviour
     public void CloseBtnHandler()
     {
         SaveConfigs();
+        PlayerManager.LoadConfigs();
+
         gameObject.SetActive(false);
     }
 

@@ -38,9 +38,17 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // HACK: Debugging purpose
+        if (JsonFile.data == null)
+        {
+            JsonFile.InitJson();
+        }
+
         playerGO = gameObject;
         playerRigid = GetComponent<Rigidbody>();
         playerCollider = GetComponent<CapsuleCollider>();
+
+        LoadConfigs();
 
         StepUpper.transform.localPosition += Vector3.up * StepHeight;
 
@@ -55,8 +63,8 @@ public class PlayerManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        /*if (ParsePos(transform.position) != initPos)
-        {*/
+        if (ParsePos(transform.position) != initPos)
+        {
             // Player movement handler
             playerRigid.velocity = MoveJoystick.Horizontal * MoveSpeed * transform.right + 
                 MoveJoystick.Vertical * MoveSpeed * transform.forward;
@@ -75,7 +83,7 @@ public class PlayerManager : MonoBehaviour
 
             // Rotate camera on vertical axis
             PlayerCamera.transform.localRotation = Quaternion.Euler(Vector3.right * xRotate);
-        /*}*/
+        }
 
         if (!IsGrounded()) 
         {
@@ -84,6 +92,12 @@ public class PlayerManager : MonoBehaviour
         }
 
         StepClimb();
+    }
+
+    public void LoadConfigs()
+    {
+        PlayerCamera.fieldOfView = JsonFile.data.fov;
+        ViewSpeed = JsonFile.data.view_sens;
     }
 
     private bool IsGrounded()
@@ -150,6 +164,8 @@ public class PlayerManager : MonoBehaviour
 
         Vector3 newPos = new Vector3(modelTransform.position.x,
             modelTransform.position.y + 100f, modelTransform.position.z);
+
+        ChangePos(newPos);
     }
 
     public void ResetPlayerPosition()

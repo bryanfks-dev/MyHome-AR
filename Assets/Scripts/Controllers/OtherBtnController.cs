@@ -8,7 +8,6 @@ public class OtherBtnController : MonoBehaviour, IPointerClickHandler
 
     [Header("Content Canvas")]
     public GameObject CurrentParentCanvas;
-    public GameObject CurrentCanvas;
     public GameObject HomeCanvas;
     public GameObject SettingsCanvas;
 
@@ -33,12 +32,11 @@ public class OtherBtnController : MonoBehaviour, IPointerClickHandler
     private void OtherBtnHandler()
     {
         OtherContent.SetActive(!OtherContent.activeSelf);
-        gameObject.SetActive(!gameObject.activeSelf);
     }
 
     public void DisplaySettingsHandler()
     {
-        CurrentCanvas.SetActive(false);
+        OtherBtnHandler();
         SettingsCanvas.SetActive(true);
     }
 
