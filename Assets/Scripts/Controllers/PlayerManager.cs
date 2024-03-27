@@ -165,6 +165,7 @@ public class PlayerManager : MonoBehaviour
         Vector3 newPos = new Vector3(modelTransform.position.x,
             modelTransform.position.y + 100f, modelTransform.position.z);
 
+        // HACK: Remove this to test stair codes
         ChangePos(newPos);
     }
 
