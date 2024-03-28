@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /*
  * SwitchCameraController script handle switching camera 
@@ -8,15 +9,7 @@ using UnityEngine;
  */
 public class SwitchCameraController : MonoBehaviour
 {
-    public GameObject[] CameraList;
     public int Manager;
-
-    [Header("Player Attributes")]
-    public PlayerManager PlayerManager;
-
-    [Header("Canvas")]
-    public GameObject ARCanvas;
-    public GameObject FreeViewCanvas;
 
     public void ChangeCamera()
     {
@@ -29,38 +22,30 @@ public class SwitchCameraController : MonoBehaviour
         switch (Manager)
         {
             case 0: // Change camera to Free View
-                SwitchCamera(0, 1);
                 Manager = 1;
 
-                PlayerManager.TeleportPlayerToHouse();
-
-                ARCanvas.SetActive(false);
+                // Unload current scene
+                SceneManager.UnloadSceneAsync("HomeScene");
 
                 Screen.orientation = ScreenOrientation.LandscapeLeft;
 
-                FreeViewCanvas.SetActive(true);
+                // Load Free view scene
+                SceneManager.LoadSceneAsync("FreeViewScene", LoadSceneMode.Additive);
 
                 break;
 
             case 1: // Change camera to AR
-                SwitchCamera(1, 0);
                 Manager = 0;
 
-                PlayerManager.ResetPlayerPosition();
-
-                FreeViewCanvas.SetActive(false);
+                // Unload current scene
+                SceneManager.UnloadSceneAsync("FreeViewScene");
 
                 Screen.orientation = ScreenOrientation.Portrait;
 
-                ARCanvas.SetActive(true);
+                // Load Home scene
+                SceneManager.LoadSceneAsync("HomeScene", LoadSceneMode.Additive);
 
                 break;
         }
-    }
-
-    private void SwitchCamera(int fromIdx, int toIdx)
-    {
-        CameraList[fromIdx].SetActive(false);
-        CameraList[toIdx].SetActive(true);
     }
 }

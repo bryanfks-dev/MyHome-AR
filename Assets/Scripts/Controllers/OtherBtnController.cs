@@ -1,14 +1,13 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class OtherBtnController : MonoBehaviour, IPointerClickHandler
 {
     public GameObject OtherContent;
-    public SwitchCameraController SwitchCameraController;
+    public FreeViewManager FreeViewManager;
 
     [Header("Content Canvas")]
-    public GameObject CurrentParentCanvas;
-    public GameObject HomeCanvas;
     public GameObject SettingsCanvas;
 
     // Start is called before the first frame update
@@ -34,14 +33,16 @@ public class OtherBtnController : MonoBehaviour, IPointerClickHandler
         SettingsCanvas.SetActive(true);
     }
 
+    public void ChangeSkyBox()
+    {
+        FreeViewManager.ChangeSkyBox();
+    }
+
     public void ExitHandler()
     {
         OtherBtnHandler();
 
-        // Switch camera
-        SwitchCameraController.ChangeCamera();
-
-        CurrentParentCanvas.SetActive(false);
-        HomeCanvas.SetActive(true);
+        // Load Home scene
+        SceneManager.LoadScene("HomeScene", LoadSceneMode.Additive);
     }
 }

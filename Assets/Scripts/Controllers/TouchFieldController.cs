@@ -15,12 +15,6 @@ public class TouchFieldController : MonoBehaviour, IPointerDownHandler, IPointer
     private int PointerId;
     private bool Pressed;
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {

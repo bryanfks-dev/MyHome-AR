@@ -31,7 +31,6 @@ public class PlayerManager : MonoBehaviour
     public float StepHeight;
     public float StepSmooth;
 
-    private static Vector3 initPos;
     private float xRotate;
     private float yRotate;
 
@@ -44,6 +43,7 @@ public class PlayerManager : MonoBehaviour
             JsonFile.InitJson();
         }
 
+        // Initialize player
         playerGO = gameObject;
         playerRigid = GetComponent<Rigidbody>();
         playerCollider = GetComponent<CapsuleCollider>();
@@ -52,32 +52,29 @@ public class PlayerManager : MonoBehaviour
 
         StepUpper.transform.localPosition += Vector3.up * StepHeight;
 
-        initPos = ParsePos(transform.position);
+        TeleportPlayerToHouse();
     }
 
     void FixedUpdate()
     {
-        if (ParsePos(playerGO.transform.position) != initPos)
-        {
-            // Player movement handler
-            playerRigid.velocity = MoveJoystick.Horizontal * MoveSpeed * transform.right + 
-                MoveJoystick.Vertical * MoveSpeed * transform.forward;
+        // Player movement handler
+        playerRigid.velocity = MoveJoystick.Horizontal * MoveSpeed * transform.right + 
+            MoveJoystick.Vertical * MoveSpeed * transform.forward;
 
-            // Camera and player body rotation handler
-            // Calculate x and y rotation value depends on given
-            // sensitivity and how long user tap the screen
-            yRotate += TouchFieldController.TouchDist.x * ViewSpeed * Time.deltaTime;
-            xRotate -= TouchFieldController.TouchDist.y * ViewSpeed * Time.deltaTime;
+        // Camera and player body rotation handler
+        // Calculate x and y rotation value depends on given
+        // sensitivity and how long user tap the screen
+        yRotate += TouchFieldController.TouchDist.x * ViewSpeed * Time.deltaTime;
+        xRotate -= TouchFieldController.TouchDist.y * ViewSpeed * Time.deltaTime;
 
-            // Prevent player to rotate more than 90 deg and -90 deg on vertical axis
-            xRotate = Mathf.Clamp(xRotate, -90f, 90f);
+        // Prevent player to rotate more than 90 deg and -90 deg on vertical axis
+        xRotate = Mathf.Clamp(xRotate, -90f, 90f);
 
-            // Rotate player on horizontal axis
-            playerRigid.rotation = Quaternion.Euler(yRotate * Vector3.up);
+        // Rotate player on horizontal axis
+        playerRigid.rotation = Quaternion.Euler(yRotate * Vector3.up);
 
-            // Rotate camera on vertical axis
-            PlayerCamera.transform.localRotation = Quaternion.Euler(Vector3.right * xRotate);
-        }
+        // Rotate camera on vertical axis
+        PlayerCamera.transform.localRotation = Quaternion.Euler(Vector3.right * xRotate);
 
         if (!IsGrounded()) 
         {
@@ -108,40 +105,29 @@ public class PlayerManager : MonoBehaviour
 
     private void StepClimb()
     {
-        if (Physics.Raycast(StepLower.transform.position, transform.TransformDirection(Vector3.forward), out _  , 1f))
+        if (Physics.Raycast(StepLower.transform.position, transform.TransformDirection(Vector3.forward), out _  , 0.3f))
         {
-            if (!Physics.Raycast(StepUpper.transform.position, transform.TransformDirection(Vector3.forward), out _, 2f))
+            if (!Physics.Raycast(StepUpper.transform.position, transform.TransformDirection(Vector3.forward), out _, 0.4f))
             {
                 playerRigid.position -= new Vector3(0, -StepSmooth * Time.deltaTime, 0);
             }
         }
 
-        if (Physics.Raycast(StepLower.transform.position, transform.TransformDirection(1.5f, 0, 1), out _, 1f))
+        if (Physics.Raycast(StepLower.transform.position, transform.TransformDirection(1.5f, 0, 1), out _, 0.3f))
         {
-            if (!Physics.Raycast(StepUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), out _, 2f))
+            if (!Physics.Raycast(StepUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), out _, 0.4f))
             {
                 playerRigid.position -= new Vector3(0f, -StepSmooth * Time.deltaTime, 0f);
             }
         }
 
-        if (Physics.Raycast(StepLower.transform.position, transform.TransformDirection(-1.5f, 0, 1), out _, 1f))
+        if (Physics.Raycast(StepLower.transform.position, transform.TransformDirection(-1.5f, 0, 1), out _, 0.3f))
         {
-            if (!Physics.Raycast(StepUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), out _, 2f))
+            if (!Physics.Raycast(StepUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), out _, 0.4f))
             {
                 playerRigid.position -= new Vector3(0f, -StepSmooth * Time.deltaTime, 0f);
             }
         }
-    }
-
-    private Vector3 ParsePos(Vector3 oldVal)
-    {
-        // ParsePos method, to get only x and z axis value
-        // from a vector with y value = 0
-
-        // Using addition of 2 vectors
-        Vector3 newVal = Vector3.right * oldVal.x + Vector3.forward * oldVal.z;
-
-        return newVal;
     }
 
     public void ChangePos(Vector3 pos)
@@ -160,12 +146,5 @@ public class PlayerManager : MonoBehaviour
             modelTransform.position.y + 2f, modelTransform.position.z);
 
         ChangePos(newPos);
-
-        Debug.Log($"{newPos} {playerGO.transform.position}");
-    }
-
-    public void ResetPlayerPosition()
-    {
-        ChangePos(initPos);
     }
 }

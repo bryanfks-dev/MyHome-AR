@@ -8,7 +8,7 @@ public class Data
     public bool passed_get_started_popup = false;
     public bool passed_instrcution = false;
     public float fov = 60f;
-    public float view_sens = 10f;
+    public float view_sens = 5f;
 }
 
 public class JsonFile: MonoBehaviour

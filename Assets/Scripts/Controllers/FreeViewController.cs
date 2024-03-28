@@ -12,12 +12,6 @@ public class FreeViewController : MonoBehaviour
         InstructionHandler();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void UnderstandBtnHandler()
     {
         JsonFile.WritePassedInstruction(true);
