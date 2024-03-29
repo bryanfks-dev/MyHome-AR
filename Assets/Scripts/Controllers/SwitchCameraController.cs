@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
  */
 public class SwitchCameraController : MonoBehaviour
 {
-    public int Manager;
+    public static int Manager;
 
     public void ChangeCamera()
     {
@@ -17,7 +17,7 @@ public class SwitchCameraController : MonoBehaviour
         GetComponent<Animator>().SetTrigger("Change");
     }
 
-    public void ManageCamera()
+    public static void ManageCamera()
     {
         switch (Manager)
         {

@@ -43,10 +43,6 @@ public class OtherBtnController : MonoBehaviour, IPointerClickHandler
     {
         OtherBtnHandler();
 
-        // Unload current scene
-        SceneManager.UnloadSceneAsync("FreeViewScene");
-
-        // Load Home scene
-        SceneManager.LoadSceneAsync("HomeScene", LoadSceneMode.Additive);
+        SwitchCameraController.ManageCamera();
     }
 }

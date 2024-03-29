@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using Vuforia;
 
 /*
  * ARManager script handle game logic related
@@ -10,7 +9,6 @@ public class ARManager : MonoBehaviour
 {
     public GameObject ARCanvas;
     public GameObject HomeCanvas;
-    public GameObject ARCamera;
 
     [Header("Slider Attribute(s)")]
     public Slider PercentSlider;
@@ -25,14 +23,9 @@ public class ARManager : MonoBehaviour
         ARCanvas.SetActive(true);
     }
 
-    public void ResetBtnHandler()
+    private void SwitchToHomeCanvas()
     {
-        VuforiaBehaviour.Instance.enabled = false;
-
         ARCanvas.SetActive(false);
-
-        VuforiaBehaviour.Instance.enabled = true;
-
         HomeCanvas.SetActive(true);
     }
 
@@ -73,5 +66,13 @@ public class ARManager : MonoBehaviour
         InitSlider(data.steps);
 
         FreeViewManager.SetModelId(data.id);
+    }
+
+    public void OnLostHandler()
+    {
+        data = null;
+        animator = null;
+
+        SwitchToHomeCanvas();
     }
 }
