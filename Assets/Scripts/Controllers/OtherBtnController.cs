@@ -35,6 +35,7 @@ public class OtherBtnController : MonoBehaviour, IPointerClickHandler
 
     public void ChangeSkyBox()
     {
+        OtherBtnHandler();
         FreeViewManager.ChangeSkyBox();
     }
 
@@ -42,7 +43,10 @@ public class OtherBtnController : MonoBehaviour, IPointerClickHandler
     {
         OtherBtnHandler();
 
+        // Unload current scene
+        SceneManager.UnloadSceneAsync("FreeViewScene");
+
         // Load Home scene
-        SceneManager.LoadScene("HomeScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("HomeScene", LoadSceneMode.Additive);
     }
 }

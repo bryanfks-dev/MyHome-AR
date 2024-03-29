@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Vuforia;
 
 /*
  * ARManager script handle game logic related
@@ -7,7 +8,9 @@ using UnityEngine.UI;
  */
 public class ARManager : MonoBehaviour
 {
-    public Canvas UICanvas;
+    public GameObject ARCanvas;
+    public GameObject HomeCanvas;
+    public GameObject ARCamera;
 
     [Header("Slider Attribute(s)")]
     public Slider PercentSlider;
@@ -16,23 +19,21 @@ public class ARManager : MonoBehaviour
     private static MarkerData data;
     private static Animator animator;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     private void SwitchToInGameCanvas()
     {
-        for (int i = 0; i < UICanvas.transform.childCount; i++)
-        {
-            GameObject childObj = UICanvas.transform.GetChild(i).gameObject;
+        HomeCanvas.SetActive(false);
+        ARCanvas.SetActive(true);
+    }
 
-            if (childObj.name != "Loading")
-            {
-                childObj.SetActive(childObj.name == "AR Canvas");
-            }
-        }
+    public void ResetBtnHandler()
+    {
+        VuforiaBehaviour.Instance.enabled = false;
+
+        ARCanvas.SetActive(false);
+
+        VuforiaBehaviour.Instance.enabled = true;
+
+        HomeCanvas.SetActive(true);
     }
 
     public void InitSlider(int steps)

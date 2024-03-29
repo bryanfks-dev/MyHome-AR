@@ -4,7 +4,7 @@ using UnityEngine;
  * PlayerManager script handle any logic and physics
  * related to player and player camera, includes
  * movement logic, body and camera rotation logic, 
- * teleporation logic and even gravity physics logic.
+ * teleporation logic, sfx, and even gravity physics logic.
  */
 [RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
 public class PlayerManager : MonoBehaviour
@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     private CapsuleCollider playerCollider;
     public GameObject IsGroundRay;
     public Camera PlayerCamera;
+    private AudioSource footStepSFX;
 
     [Header("Player Movement")]
     public FixedJoystick MoveJoystick;
@@ -47,6 +48,7 @@ public class PlayerManager : MonoBehaviour
         playerGO = gameObject;
         playerRigid = GetComponent<Rigidbody>();
         playerCollider = GetComponent<CapsuleCollider>();
+        footStepSFX = GetComponent<AudioSource>();
 
         LoadConfigs();
 
@@ -60,6 +62,9 @@ public class PlayerManager : MonoBehaviour
         // Player movement handler
         playerRigid.velocity = MoveJoystick.Horizontal * MoveSpeed * transform.right + 
             MoveJoystick.Vertical * MoveSpeed * transform.forward;
+
+        // Only enable footstep sound when player moving the joystick
+        footStepSFX.enabled = (MoveJoystick.Horizontal != 0 || MoveJoystick.Vertical != 0);
 
         // Camera and player body rotation handler
         // Calculate x and y rotation value depends on given
