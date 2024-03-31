@@ -12,13 +12,26 @@ public class SettingsController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for (int i = 0; i < ConfigWrappers.Length; i++)
+        {
+            Text configText = ConfigWrappers[i].transform.GetChild(0).GetComponent<Text>();
 
-    }
+            int value = 0;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            switch (i)
+            {
+                case 0:
+                    value = (int)JsonFile.data.fov;
+                    break;
+
+                case 1:
+                    value = (int)JsonFile.data.view_sens;
+                    break;
+            }
+
+            // Replace "(...)" with current slider value using regex
+            configText.text = Regex.Replace(configText.text, @"\(.*?\)", $"({(int)value})");
+        }
     }
 
     private void SaveConfigs()
