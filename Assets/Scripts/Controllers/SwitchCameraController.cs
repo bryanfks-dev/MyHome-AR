@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
  */
 public class SwitchCameraController : MonoBehaviour
 {
+    [Header("Camera Manager")]
     public static int Manager;
 
     public void ChangeCamera()
@@ -30,7 +31,7 @@ public class SwitchCameraController : MonoBehaviour
                 Screen.orientation = ScreenOrientation.LandscapeLeft;
 
                 // Load Free view scene
-                SceneManager.LoadSceneAsync("FreeViewScene", LoadSceneMode.Additive);
+                SceneManager.LoadScene("FreeViewScene", LoadSceneMode.Additive);
 
                 break;
 
@@ -43,7 +44,7 @@ public class SwitchCameraController : MonoBehaviour
                 Screen.orientation = ScreenOrientation.Portrait;
 
                 // Load Home scene
-                SceneManager.LoadSceneAsync("HomeScene", LoadSceneMode.Additive);
+                SceneManager.LoadScene("HomeScene", LoadSceneMode.Additive);
 
                 break;
         }

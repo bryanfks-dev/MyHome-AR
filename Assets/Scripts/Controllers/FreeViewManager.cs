@@ -16,12 +16,18 @@ public class FreeViewManager : MonoBehaviour
     public Material LightSky;
     public Material StarySky;
 
-    [Header("Sky Changer Manager")]
+    [Header("Skybox Manager")]
     public int SkyBoxId = 0;
 
     private static int modelId;
 
-    public static void SetModelId(int id)
+    // Start is called before the first frame update
+    void Start()
+    {
+        SwitchSkyMaterial(LightSky);
+    }
+
+        public static void SetModelId(int id)
     {
         modelId = id;
     }

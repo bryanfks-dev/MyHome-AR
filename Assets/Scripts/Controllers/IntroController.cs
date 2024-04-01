@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class IntroController : MonoBehaviour
 {
-    public int pageCount;
-    public Color selectedPageColor;
-    public Color unselectedPageColor;
-    public GameObject[] dynamicGameobjects;
+    [Header("Introduction Scene Attribute(s)")]
+    public int PageCount;
+    public int CurrPageIdx = 0;
 
-    private int currPageIdx = 0;
+    [Header("Page Attribute(s)")]
+    public Color SelectedPageColor;
+    public Color UnselectedPageColor;
+    public GameObject[] DynamicGameobjects;
     private GameObject nextBtn;
     private GameObject skipBtn;
     private List<GameObject> dots;
@@ -41,13 +43,13 @@ public class IntroController : MonoBehaviour
 
     private void DisplayPage()
     {
-        foreach (GameObject go in dynamicGameobjects)
+        foreach (GameObject go in DynamicGameobjects)
         {
             // Iterate through go children
             for (int i = 0; i < go.transform.childCount; i++) {
                 GameObject childObj = go.transform.GetChild(i).gameObject;
 
-                childObj.SetActive(i == currPageIdx);
+                childObj.SetActive(i == CurrPageIdx);
             }
         }
     }
@@ -65,32 +67,32 @@ public class IntroController : MonoBehaviour
     private void UpdateProgressColor()
     {
         // Display page content according to current page index
-        for (int i = 0; i < pageCount; i++)
+        for (int i = 0; i < PageCount; i++)
         {
             Image goAsImg = dots[i].GetComponent<Image>();
 
-            if (i == currPageIdx)
+            if (i == CurrPageIdx)
             {
-                goAsImg.color = selectedPageColor;
+                goAsImg.color = SelectedPageColor;
             }
             else
             {
-                goAsImg.color = unselectedPageColor;
+                goAsImg.color = UnselectedPageColor;
             }
         }
     }
 
     public void NextBtnHandler()
     {
-        if (currPageIdx < pageCount - 2)
+        if (CurrPageIdx < PageCount - 2)
         {
             // Update index
-            currPageIdx++;
+            CurrPageIdx++;
 
             DisplayPage();
             UpdateProgressColor();
         }
-        else if (currPageIdx == pageCount - 2)
+        else if (CurrPageIdx == PageCount - 2)
         {
             SkipBtnHandler();
         }
@@ -111,7 +113,7 @@ public class IntroController : MonoBehaviour
     public void SkipBtnHandler()
     {
         // Update index
-        currPageIdx = pageCount - 1;
+        CurrPageIdx = PageCount - 1;
 
         DisplayPage();
         HideSkipButton();

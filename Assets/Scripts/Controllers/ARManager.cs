@@ -7,6 +7,7 @@ using UnityEngine.UI;
  */
 public class ARManager : MonoBehaviour
 {
+    [Header("Canvas")]
     public GameObject ARCanvas;
     public GameObject HomeCanvas;
 

@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class OtherBtnController : MonoBehaviour, IPointerClickHandler
 {
     public GameObject OtherContent;
+
+    [Header("Related Script(s)")]
     public FreeViewManager FreeViewManager;
 
     [Header("Content Canvas")]

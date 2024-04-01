@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class FreeViewController : MonoBehaviour
 {
-    public GameObject InstructionCanvas;
+    [Header("Canvas")]
+    public GameObject GuideCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,7 @@ public class FreeViewController : MonoBehaviour
         JsonFile.WritePassedInstruction(true);
 
         // Hide canvas
-        InstructionCanvas.SetActive(false);
+        GuideCanvas.SetActive(false);
     }
 
     private IEnumerator WaitForBtn(Button btn, int seconds)
@@ -35,7 +36,7 @@ public class FreeViewController : MonoBehaviour
         if (JsonFile.data.passed_instrcution)
         {
             // Hide canvas
-            InstructionCanvas.SetActive(false);
+            GuideCanvas.SetActive(false);
         }
         else
         {

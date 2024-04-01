@@ -3,17 +3,12 @@ using UnityEngine;
 
 public class HomeController : MonoBehaviour
 {
+    [Header("Get Started Popup Attribute(s)")]
     public GameObject GetStartedPopUp;
 
     // Start is called before the first frame update
     void Start()
     {
-        // HACK: Debugging purpose
-        if (JsonFile.data == null)
-        {
-            JsonFile.InitJson();
-        }
-
         GetStartedPopUpHandler();
     }
 

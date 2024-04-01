@@ -1493,10 +1493,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b28d50dde71d2d14d81f646d84290d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pageCount: 3
-  selectedPageColor: {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 1}
-  unselectedPageColor: {r: 0.8509804, g: 0.8509804, b: 0.8509804, a: 1}
-  dynamicGameobjects:
+  PageCount: 3
+  CurrPageIdx: 0
+  SelectedPageColor: {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 1}
+  UnselectedPageColor: {r: 0.8509804, g: 0.8509804, b: 0.8509804, a: 1}
+  DynamicGameobjects:
   - {fileID: 50203165}
   - {fileID: 1578399113}
   - {fileID: 1996414194}
